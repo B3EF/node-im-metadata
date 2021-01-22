@@ -23,7 +23,7 @@ module.exports = function(path, opts, cb) {
 }
 };
 
-module.exports.cmd = function(path, opts) {
+module.exports.cmd = function(path..split(";",1), opts) {
   opts = opts || {};
   var format = [
     'name=',
