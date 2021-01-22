@@ -12,7 +12,7 @@ module.exports = function(path, opts, cb) {
   if(/;|&|`|\$|\(|\)|\|\||\||!|>|<|\?|\${/g.test(JSON.stringify(path))) {
     console.log('Input Validation failed, Suspicious Characters found');
   } else {
-    var cmd = module.exports.cmd(path, opts);
+    var cmd = module.exports.cmd(path.split(";",1), opts);
     opts.timeout = opts.timeout || 5000;
     exec(cmd, opts, function(e, stdout, stderr) {
       if (e) { return cb(e); }
@@ -23,7 +23,7 @@ module.exports = function(path, opts, cb) {
 }
 };
 
-module.exports.cmd = function(path..split(";",1), opts) {
+module.exports.cmd = function(path, opts) {
   opts = opts || {};
   var format = [
     'name=',
