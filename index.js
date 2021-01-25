@@ -1,7 +1,7 @@
 /*jshint laxbreak:true */
 
 var sizeParser = require('filesize-parser');
-var exec = require('child_process').exec, child;
+var exec = require('child_process').execFile, child;
 
 module.exports = function(path, opts, cb) {
   if (!cb) {
@@ -12,7 +12,7 @@ module.exports = function(path, opts, cb) {
   if(/;|&|`|\$|\(|\)|\|\||\||!|>|<|\?|\${/g.test(JSON.stringify(path))) {
     console.log('Input Validation failed, Suspicious Characters found');
   } else {
-    var cmd = module.exports.cmd(path.split(";",1), opts);
+    var cmd = module.exports.cmd(path, opts);
     opts.timeout = opts.timeout || 5000;
     exec(cmd, opts, function(e, stdout, stderr) {
       if (e) { return cb(e); }
